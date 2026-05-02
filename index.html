@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking - Plateforme d'Installation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #060412;
+            --primary: #9d50bb;
+            --secondary: #6e48aa;
+            --accent: #c471ed;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND DYNAMIQUE --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 0%, #1e0a3d 0%, #060412 100%);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* --- HEADER --- */
+        header { margin-bottom: 60px; }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(to bottom, #ffffff, #b39ddb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            color: #b39ddb;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        /* --- GRID DE CARTES --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 50px 35px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Style des nouvelles icônes Lucide */
+        .lucide-icon {
+            width: 55px;
+            height: 55px;
+            color: var(--accent);
+            margin-bottom: 25px;
+            stroke-width: 1.5;
+        }
+
+        h2 { font-size: 1.8rem; margin-bottom: 15px; font-weight: 600; }
+        p { opacity: 0.6; line-height: 1.6; margin-bottom: 35px; font-weight: 300; }
+
+        /* --- BOUTONS --- */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-client {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 20px rgba(157, 80, 187, 0.3);
+        }
+
+        .btn-business {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(157, 80, 187, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* --- FOOTER INSTRUCTIONS --- */
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            opacity: 0.4;
+            font-size: 0.85rem;
+        }
+
+        .info-item { display: flex; align-items: center; gap: 8px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 650px) {
+            .footer-info { flex-direction: column; align-items: center; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <h1>Event Booking</h1>
+            <p class="tagline">Simplify your celebrations</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <i data-lucide="calendar-check" class="lucide-icon"></i>
+                <h2>User App</h2>
+                <p>Browse venues, photographers, and DJs. Book your perfect event in seconds.</p>
+                <a href="myapp.zip" class="btn btn-client">Download APK</a>
+            </div>
+
+            <div class="card">
+                <i data-lucide="briefcase" class="lucide-icon"></i>
+                <h2>Business App</h2>
+                <p>Manage your services, track bookings, and grow your business instantly.</p>
+                <a href="myapp.zip" class="btn btn-business">Merchant Portal</a>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <div class="info-item"><i data-lucide="shield-check" size="16"></i> Secure Download</div>
+            <div class="info-item"><i data-lucide="cpu" size="16"></i> Android Compatible</div>
+            <div class="info-item"><i data-lucide="refresh-cw" size="16"></i> Version 1.0.0</div>
+        </div>
+    </div>
+
+    <script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
+
+        // Script pour les particules de fond
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let dots = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            dots = [];
+            for(let i=0; i<60; i++) {
+                dots.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    speedY: (Math.random() - 0.5) * 0.4
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(179, 157, 219, 0.2)";
+            dots.forEach(dot => {
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
+                ctx.fill();
+                dot.x += dot.speedX;
+                dot.y += dot.speedY;
+                if(dot.x < 0 || dot.x > canvas.width) dot.speedX *= -1;
+                if(dot.y < 0 || dot.y > canvas.height) dot.speedY *= -1;
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    </script>
+</body>
+</html>
