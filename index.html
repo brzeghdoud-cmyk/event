@@ -92,7 +92,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        
         .lucide-icon {
             width: 55px;
             height: 55px;
@@ -104,7 +103,6 @@
         h2 { font-size: 1.8rem; margin-bottom: 15px; font-weight: 600; }
         p { opacity: 0.6; line-height: 1.6; margin-bottom: 35px; font-weight: 300; }
 
-        /* --- BOUTONS --- */
         .btn {
             display: block;
             width: 100%;
@@ -116,6 +114,7 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             text-transform: uppercase;
+            text-align: center;
         }
 
         .btn-client {
@@ -191,10 +190,8 @@
     </div>
 
     <script>
-        // Initialisation des icônes Lucide
         lucide.createIcons();
 
-        // Script pour les particules de fond
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let dots = [];
